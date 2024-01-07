@@ -88,10 +88,25 @@ const DefaultRowElement = observer(({ marginLeft }: IDefaultRowElemen) => {
             )}
           </div>
           <Input type="string" name="rowName" register={register} width={733} />
-          <Input type="number" name="salary" register={register} />
-          <Input type="number" name="equipmentCosts" register={register} />
-          <Input type="number" name="overheads" register={register} />
-          <Input type="number" name="estimatedProfit" register={register} />
+          <Input type="number" name="salary" register={register} width={176} />
+          <Input
+            type="number"
+            name="equipmentCosts"
+            register={register}
+            width={176}
+          />
+          <Input
+            type="number"
+            name="overheads"
+            register={register}
+            width={176}
+          />
+          <Input
+            type="number"
+            name="estimatedProfit"
+            register={register}
+            width={176}
+          />
         </form>
         {entityStore.entity.length !== 0 && <HorizontalLine />}
       </li>
