@@ -203,6 +203,8 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
               <p className={"entity__item"}>{item.rowName}</p>
               <p className={"entity__item"}>{item.salary}</p>
               <p className={"entity__item"}>{item.equipmentCosts}</p>
+              <p className={"entity__item"}>{item.overheads}</p>
+              <p className={"entity__item"}>{item.estimatedProfit}</p>
             </div>
           </div>
           {parent !== null && <HorizontalLine />}
