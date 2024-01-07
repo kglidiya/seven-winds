@@ -9,7 +9,7 @@ import {
   ITreeResponse,
 } from "./types";
 
-export const BASE_URL = "http://185.244.172.108:8081/";
+export const BASE_URL = "http://185.244.172.108:8081";
 
 export const checkResponse = <T>(res: AxiosResponse): Promise<T> => {
   if (res.status !== 200) {
