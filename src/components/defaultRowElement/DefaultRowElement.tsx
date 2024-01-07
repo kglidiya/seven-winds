@@ -16,25 +16,38 @@ const DefaultRowElement = observer(({ marginLeft }: IDefaultRowElemen) => {
   const entityStore = useContext(Context).entity;
   const { register, handleSubmit, getValues } = useForm<FieldValues>({
     values: {
-      equipmentCosts: 0,
-      estimatedProfit: 0,
-      machineOperatorSalary: 0,
-      mainCosts: 0,
-      materials: 0,
-      mimExploitation: 0,
-      overheads: 0,
+      equipmentCosts: null,
+      estimatedProfit: null,
+      machineOperatorSalary: null,
+      mainCosts: null,
+      materials: null,
+      mimExploitation: null,
+      overheads: null,
       parentId: null,
       rowName: "",
-      salary: 0,
-      supportCosts: 0,
+      salary: null,
+      supportCosts: null,
     },
   });
   const ref = useRef<HTMLFormElement | null>(null);
   const onSubmit = (values: FieldValues) => {
-    entityStore.createRow({
-      ...values,
+    const data = {
+      equipmentCosts: values.equipmentCosts ? +values.equipmentCosts : 0,
+      estimatedProfit: values.estimatedProfit ? +values.estimatedProfit : 0,
+      machineOperatorSalary: +values.machineOperatorSalary
+        ? +values.machineOperatorSalary
+        : 0,
+      mainCosts: values.mainCosts ? +values.mainCosts : 0,
+      materials: values.materials ? +values.materials : 0,
+      mimExploitation: values.mimExploitation ? +values.mimExploitation : 0,
+      overheads: values.overheads ? +values.overheads : 0,
       parentId: entityStore.entity.length !== 0 ? entityStore.parent : null,
-    });
+      rowName: values.rowName,
+      salary: values.salary ? +values.salary : 0,
+      supportCosts: values.supportCosts ? +values.supportCosts : 0,
+    }
+
+    entityStore.createRow(data);
     entityStore.setEditMode(false);
   };
 
@@ -87,8 +100,19 @@ const DefaultRowElement = observer(({ marginLeft }: IDefaultRowElemen) => {
               />
             )}
           </div>
-          <Input type="string" name="rowName" register={register} width={733} />
-          <Input type="number" name="salary" register={register} width={176} />
+          <Input
+            type="string"
+            name="rowName"
+            register={register}
+            width={733}
+            placeholder=""
+          />
+          <Input
+            type="number"
+            name="salary"
+            register={register}
+            width={176}
+          />
           <Input
             type="number"
             name="equipmentCosts"

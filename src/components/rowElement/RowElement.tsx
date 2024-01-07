@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { HorizontalLine } from "../ui/horizontalLine/HorizontalLine";
 import { HorizontalDevider } from "../ui/horizontalDevider/HorizontalDevider";
 import ListIcon from "../ui/icons/listIcon/ListIcon";
-import { IRowResponse } from "../../utils/types";
+import { IOutlayRow, IRowResponse } from "../../utils/types";
 import TrashIcon from "../ui/icons/trashIcon/TrashIcon";
 import { Context } from "../..";
 import { getParent } from "../../utils/helpers";
@@ -16,17 +16,20 @@ interface IRowElement {
 
 const RowElement = observer(({ item, marginLeft }: IRowElement) => {
   const entityStore = useContext(Context).entity;
-  const [values, setValues] = useState({
-    equipmentCosts: 0,
-    estimatedProfit: 0,
-    machineOperatorSalary: 0,
-    mainCosts: 0,
-    materials: 0,
-    mimExploitation: 0,
-    overheads: 0,
-    rowName: "",
-    salary: 0,
-    supportCosts: 0,
+  const [editMode, setEditMode] = useState(false);
+  const [nodeToUpdate, setNodeToUpdate] = useState<number|null>(null)
+ 
+  const [values, setValues] = useState<IOutlayRow>({
+    equipmentCosts: item.equipmentCosts,
+    estimatedProfit: item.estimatedProfit,
+    machineOperatorSalary: item.machineOperatorSalary,
+    mainCosts: item.mainCosts,
+    materials: item.materials,
+    mimExploitation: item.mimExploitation,
+    overheads: item.overheads,
+    rowName: item.rowName,
+    salary: item.salary,
+    supportCosts: item.supportCosts,
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,17 +37,14 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
     setValues({ ...values, [name]: value });
   };
 
-  const [editMode, setEditMode] = useState(false);
-
   const addNode = (parentId: number | null) => {
     entityStore.setParent(parentId);
     entityStore.addDefaultNode(parentId);
     entityStore.setEditMode(true);
   };
 
-  const updateNode = (id: number | null) => {
+  const switchEditMode = () => {
     setEditMode(!editMode);
-    entityStore.setNodeToUpdate(id);
     entityStore.setEditMode(!editMode);
   };
 
@@ -57,9 +57,10 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
   );
 
   const onSubmit = () => {
-    entityStore.updateRow(entityStore.nodeToUpdate, values);
+    entityStore.updateRow(nodeToUpdate, values);
     setEditMode(false);
     entityStore.setEditMode(false);
+    setNodeToUpdate(null)
   };
 
   const handleSubmit: KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -74,7 +75,8 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
         <li
           className={"entity__items"}
           onDoubleClick={() => {
-            updateNode(item.id);
+            switchEditMode();
+            setNodeToUpdate(null)
           }}
         >
           <HorizontalDevider
@@ -109,7 +111,7 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
                   className={"entity__input"}
                   type="string"
                   name="rowName"
-                  placeholder={item.rowName}
+                  value={values.rowName}
                   onChange={handleChange}
                   onKeyDown={handleSubmit}
                   width={733}
@@ -118,7 +120,7 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
                   className={"entity__input"}
                   type="number"
                   name="salary"
-                  placeholder={String(item.salary)}
+                  value={values.salary}
                   onChange={handleChange}
                   onKeyDown={handleSubmit}
                 />
@@ -126,7 +128,7 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
                   className={"entity__input"}
                   type="number"
                   name="equipmentCosts"
-                  placeholder={String(item.equipmentCosts)}
+                  value={values.equipmentCosts}
                   onChange={handleChange}
                   onKeyDown={handleSubmit}
                 />
@@ -134,7 +136,7 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
                   className={"entity__input"}
                   type="number"
                   name="overheads"
-                  placeholder={String(item.overheads)}
+                  value={values.overheads}
                   onChange={handleChange}
                   onKeyDown={handleSubmit}
                 />
@@ -142,7 +144,7 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
                   className={"entity__input"}
                   type="number"
                   name="estimatedProfit"
-                  placeholder={String(item.estimatedProfit)}
+                  value={values.estimatedProfit}
                   onChange={handleChange}
                   onKeyDown={handleSubmit}
                 />
@@ -157,7 +159,8 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
         <li
           className={"entity__items"}
           onDoubleClick={() => {
-            updateNode(item.id);
+            switchEditMode();
+            setNodeToUpdate(item.id)
           }}
         >
           <HorizontalDevider

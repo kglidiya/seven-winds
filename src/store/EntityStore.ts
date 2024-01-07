@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS, runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import {
   createRowInEntity,
   deleteRowInEntity,
@@ -23,7 +23,6 @@ import {
 export default class EntityStore {
   _entity: ITreeResponse[];
   _parent: null | number;
-  _nodeToUpdate: null | number;
   _editModeOn: boolean;
   _treeStructure: ITreeStructure;
   _iconOnHove: boolean;
@@ -31,7 +30,6 @@ export default class EntityStore {
   constructor() {
     this._entity = [];
     this._parent = null;
-    this._nodeToUpdate = null;
     this._editModeOn = false;
     this._iconOnHove = false;
     this._treeStructure = {
@@ -78,7 +76,6 @@ export default class EntityStore {
     const res = await updateRowInEntity(id, body);
     runInAction(() => {
       const newData = (res.changed as IRowResponse[]).concat([res.current]);
-      console.log(newData);
       const treeUpdated = updateTree(this._entity, newData);
       this._entity = treeUpdated;
     });
@@ -96,10 +93,6 @@ export default class EntityStore {
 
   setParent(parent: null | number) {
     this._parent = parent;
-  }
-
-  setNodeToUpdate(node: null | number) {
-    this._nodeToUpdate = node;
   }
 
   setEditMode(status: boolean) {
@@ -121,10 +114,6 @@ export default class EntityStore {
 
   get parent() {
     return this._parent;
-  }
-
-  get nodeToUpdate() {
-    return this._nodeToUpdate;
   }
 
   get edidModeOn() {

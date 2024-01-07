@@ -6,7 +6,7 @@ import Layout from "./components/layout/Layout";
 import Header from "./components/header/Header";
 
 const App = () => {
-  // console.log('toJS(entityStore.entity)')
+
   return (
     <Router>
       <Header />
