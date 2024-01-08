@@ -5,3 +5,7 @@
 -	React(+TypeScript)
 -	SASS
 -	MobX
+  
+## Запуск проекта:
+- npm install
+- npm run start
