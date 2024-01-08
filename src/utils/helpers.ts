@@ -1,6 +1,7 @@
 import { defaultNode } from "./constants";
 import { IRowResponse, ITreeResponse, ITreeStructure } from "./types";
 
+
 export function addNewRow(
   tree: ITreeResponse[],
   parentId: number | null,
@@ -96,12 +97,14 @@ export function getTreeLengthLevel(tree: ITreeResponse[]) {
 export function getParent(tree: ITreeResponse[], id: number | null) {
   let indexOfParent = 0;
   const nodes = countTreeLength(tree);
+ 
   nodes.forEach((node: ITreeResponse[]) => {
     if (node[0].id === id) {
       indexOfParent = nodes.indexOf(node) - 1;
     }
   });
+
   if (indexOfParent >= 0) {
-    return nodes.at(indexOfParent)![0].id;
+    return nodes[indexOfParent][0].id
   } else return null;
 }

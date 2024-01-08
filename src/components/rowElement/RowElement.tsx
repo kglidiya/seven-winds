@@ -37,9 +37,9 @@ const RowElement = observer(({ item, marginLeft }: IRowElement) => {
     setValues({ ...values, [name]: value });
   };
 
-  const addNode = (parentId: number | null) => {
-    entityStore.setParent(parentId);
-    entityStore.addDefaultNode(parentId);
+  const addNode = (id: number | null) => {
+    entityStore.setParent(id);
+    entityStore.addDefaultNode(id);
     entityStore.setEditMode(true);
   };
 
