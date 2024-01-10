@@ -88,16 +88,16 @@ const RowElement = observer(
             <div className={"entity__row"}>
               <div
                 className={"entity__icons"}
-                onMouseEnter={() => entityStore.setIconOnhove(true)}
-                onMouseLeave={() => entityStore.setIconOnhove(false)}
+                onMouseEnter={() => entityStore.setIconOnHover(true)}
+                onMouseLeave={() => entityStore.setIconOnHover(false)}
                 style={{
-                  backgroundColor: entityStore.iconOnHove
+                  backgroundColor: entityStore.iconOnHover
                     ? "rgba(65, 65, 68, 1)"
                     : "transparent",
                 }}
               >
                 <ListIcon />
-                {entityStore.iconOnHove && (
+                {entityStore.iconOnHover && (
                   <TrashIcon
                     onClick={() => {
                       deleteNode(item.id);
@@ -213,10 +213,10 @@ const RowElement = observer(
             <div className={"entity__row"}>
               <div
                 className={"entity__icons"}
-                onMouseEnter={() => entityStore.setIconOnhove(true)}
-                onMouseLeave={() => entityStore.setIconOnhove(false)}
+                onMouseEnter={() => entityStore.setIconOnHover(true)}
+                onMouseLeave={() => entityStore.setIconOnHover(false)}
                 style={{
-                  backgroundColor: entityStore.iconOnHove
+                  backgroundColor: entityStore.iconOnHover
                     ? "rgba(65, 65, 68, 1)"
                     : "transparent",
                 }}
@@ -229,7 +229,7 @@ const RowElement = observer(
                     }
                   }}
                 />
-                {entityStore.iconOnHove && (
+                {entityStore.iconOnHover && (
                   <TrashIcon
                     onClick={() => {
                       if (!entityStore.edidModeOn) {

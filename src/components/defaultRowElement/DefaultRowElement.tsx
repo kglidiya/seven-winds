@@ -85,16 +85,16 @@ const DefaultRowElement = observer(
           >
             <div
               className={"entity__icons"}
-              onMouseEnter={() => entityStore.setIconOnhove(true)}
-              onMouseLeave={() => entityStore.setIconOnhove(false)}
+              onMouseEnter={() => entityStore.setIconOnHover(true)}
+              onMouseLeave={() => entityStore.setIconOnHover(false)}
               style={{
-                backgroundColor: entityStore.iconOnHove
+                backgroundColor: entityStore.iconOnHover
                   ? "rgba(65, 65, 68, 1)"
                   : "transparent",
               }}
             >
               <ListIcon />
-              {entityStore.iconOnHove && (
+              {entityStore.iconOnHover && (
                 <TrashIcon
                   onClick={() => {
                     entityStore.deleteDefaultNode(null);

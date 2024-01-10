@@ -25,13 +25,13 @@ export default class EntityStore {
   _parent: null | number;
   _editModeOn: boolean;
   _treeStructure: ITreeStructure;
-  _iconOnHove: boolean;
+  _iconOnHover: boolean;
 
   constructor() {
     this._entity = [];
     this._parent = null;
     this._editModeOn = false;
-    this._iconOnHove = false;
+    this._iconOnHover = false;
     this._treeStructure = {
       level: 0,
       length: 0,
@@ -99,8 +99,8 @@ export default class EntityStore {
     this._editModeOn = status;
   }
 
-  setIconOnhove(state: boolean) {
-    this._iconOnHove = state;
+  setIconOnHover(state: boolean) {
+    this._iconOnHover = state;
   }
 
   getTreeStructure() {
@@ -124,8 +124,8 @@ export default class EntityStore {
     return this._treeStructure;
   }
 
-  get iconOnHove() {
-    return this._iconOnHove;
+  get iconOnHover() {
+    return this._iconOnHover;
   }
 }
 
