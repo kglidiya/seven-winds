@@ -27,7 +27,6 @@ const Main = observer(({ entity }: IMain) => {
     }
   }, [entityStore, entityStore.entity]);
 
-  console.log(strokeWidth);
   useEffect(() => {
     const scrollContainer = ref.current;
     const scrollHandler = (e: WheelEvent) => {
