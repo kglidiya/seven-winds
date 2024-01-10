@@ -49,7 +49,7 @@ export function updateTree(tree: ITreeResponse[], newData: IRowResponse[]) {
   return tree;
 }
 
-export function addDefaultNode(tree: ITreeResponse[], parentId: number) {
+export function addDefaultNode(tree: ITreeResponse[], parentId: number|null) {
   tree.forEach((node) => {
     if (node.id === parentId) {
       node.child.push(defaultNode);

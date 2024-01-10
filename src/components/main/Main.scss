@@ -1,8 +1,9 @@
-.rows {
-  width: fit-content;
+.tree {
+  width: 100%;
   background-color: rgba(32, 33, 36, 1);
-  margin: 0;
-  padding: 0;
+  overflow: hidden;
+  padding-bottom: 50px;
+  margin-top: 44px;
 
   &__header {
     display: flex;
@@ -46,6 +47,7 @@
     font-weight: 400;
     color: rgba(161, 161, 170, 1);
   }
+
   &__column:nth-child(1) {
     padding-left: 20px;
   }

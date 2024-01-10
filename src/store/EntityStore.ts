@@ -60,8 +60,8 @@ export default class EntityStore {
     });
   }
 
-  async deleteRow(id: number) {
-    const res = await deleteRowInEntity(id);
+  async deleteRow(id: number|null) {
+    const res = await deleteRowInEntity(Number(id));
     runInAction(() => {
       this._entity = deleteNode(this._entity, id);
       if (res.changed) {
@@ -72,8 +72,8 @@ export default class EntityStore {
     this._treeStructure = treeStructure;
   }
 
-  async updateRow(id: number, body: IOutlayRow) {
-    const res = await updateRowInEntity(id, body);
+  async updateRow(id: number|null, body: IOutlayRow) {
+    const res = await updateRowInEntity(Number(id), body);
     runInAction(() => {
       const newData = (res.changed as IRowResponse[]).concat([res.current]);
       const treeUpdated = updateTree(this._entity, newData);
@@ -81,12 +81,12 @@ export default class EntityStore {
     });
   }
 
-  addDefaultNode(parentId: number) {
+  addDefaultNode(parentId: number|null) {
     const tree = addDefaultNode(this._entity, parentId);
     this._entity = tree;
   }
 
-  deleteDefaultNode(id: number) {
+  deleteDefaultNode(id: number|null) {
     const tree = deleteNode(this._entity, id);
     this._entity = tree;
   }

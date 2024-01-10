@@ -11,10 +11,11 @@ import React from "react";
 
 interface ITree {
   rows: ITreeResponse[];
+  strokeWidth: number;
 }
 
-const Entity = observer(({ rows }: ITree) => {
-  const entityStore = useContext(Context).entity;
+const Entity = observer(({ rows, strokeWidth }: ITree) => {
+  const entityStore = useContext(Context)!.entity;
   const ref = useRef<HTMLUListElement | null>(null);
   const [height, setHeight] = useState(0);
   const [marginLeft, setMarginLeft] = useState(0);
@@ -43,7 +44,9 @@ const Entity = observer(({ rows }: ITree) => {
 
   return (
     <ul className={"entity"} ref={ref}>
-      {rows.length === 0 && <DefaultRowElement marginLeft={marginLeft} />}
+      {rows.length === 0 && (
+        <DefaultRowElement marginLeft={marginLeft} strokeWidth={strokeWidth} />
+      )}
       {rows.length > 0 &&
         rows.map((item) => (
           <React.Fragment key={item.id}>
@@ -52,13 +55,20 @@ const Entity = observer(({ rows }: ITree) => {
             )}
             {item.id !== null ? (
               <>
-                <RowElement item={item} marginLeft={marginLeft} />
+                <RowElement
+                  item={item}
+                  marginLeft={marginLeft}
+                  strokeWidth={strokeWidth}
+                />
               </>
             ) : (
-              <DefaultRowElement marginLeft={marginLeft} />
+              <DefaultRowElement
+                marginLeft={marginLeft}
+                strokeWidth={strokeWidth}
+              />
             )}
             {item.child.length !== 0 && (
-              <Entity rows={item.child} />
+              <Entity rows={item.child} strokeWidth={strokeWidth} />
             )}
           </React.Fragment>
         ))}

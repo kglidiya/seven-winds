@@ -4,7 +4,10 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import EntityStore from "./store/EntityStore";
-export const Context = createContext<any>(null);
+export interface IEntityStore {
+  entity: EntityStore
+}
+export const Context = createContext<IEntityStore|null>(null);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

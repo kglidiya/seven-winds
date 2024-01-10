@@ -1,5 +1,6 @@
 .header {
   height: 44px;
+  width: 100%;
   border-bottom: 1px solid rgba(65, 65, 68, 1);
   background-color: rgba(39, 39, 42, 1);
   display: flex;
@@ -7,7 +8,10 @@
   gap: 20px;
   align-items: center;
   padding-left: 20px;
-  min-width: 1865px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
 
 
   &__link {
